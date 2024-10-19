@@ -1,12 +1,8 @@
-import mongoose, { Schema, Document} from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { IUser } from "../inerfaces";
 
-export interface UserInterface extends Document {
-    name: string;
-    email: string;
-    phone: number;
-}
 
-const userSchema: Schema = new mongoose.Schema({
+const userSchema: Schema = new Schema<IUser> ({
     name: {
         type: String
     },
@@ -18,6 +14,9 @@ const userSchema: Schema = new mongoose.Schema({
     phone: {
         type: Number
     },
+},
+{
+    timestamps: true
 })
 
-export const User = mongoose.model<UserInterface>('User', userSchema)
+export const User = mongoose.model<IUser>('User', userSchema)
